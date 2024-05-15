@@ -8,3 +8,4 @@ drf-yasg
 python-slugify
 redis
 celery
+django-cors-headers
