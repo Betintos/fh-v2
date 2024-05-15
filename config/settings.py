@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     "rest_framework_simplejwt",
     "django_filters",
     "drf_yasg",
-    # "corsheaders",
+    "corsheaders",
     # apps
     "accounts",
 ]
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -172,3 +173,10 @@ SWAGGER_SETTINGS = {
 
 CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000", # узнать у фронта на каком хосте они запускают проект и добавить сюда + домен
+    "https://127.0.0.1:3000"
+]
+CORS_ALLOWED_METHODS = ["GET", "POST",]
+CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS
