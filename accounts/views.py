@@ -1,10 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import generics
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, AccountSerializer
 
 
 User = get_user_model()
@@ -28,3 +29,8 @@ class ActivationView(APIView):
         user.is_active = True
         user.save()
         return Response("Активировано", 200)
+
+
+class AccountListView(generics.ListAPIView):
+    queryset = User.objects.all().filter(is_staff=False, is_superuser=False)
+    serializer_class = AccountSerializer

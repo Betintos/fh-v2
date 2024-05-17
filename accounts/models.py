@@ -33,6 +33,8 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     is_active = models.BooleanField(default=False)
     activation_code = models.CharField(max_length=10, blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []

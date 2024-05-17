@@ -29,3 +29,16 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         send_activation_code.delay(user.email, user.activation_code)
         return user
+
+
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            "id",
+            "is_active",
+            "email",
+            "first_name",
+            "last_name",
+            "profile_picture",
+        ]
