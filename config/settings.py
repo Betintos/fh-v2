@@ -28,7 +28,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["34.125.223.99"]
+ALLOWED_HOSTS = ["34.125.223.99", "localhost", "127.0.0.1"]
 
 AUTH_USER_MODEL = "accounts.User"
 
@@ -175,8 +175,11 @@ CELERY_BROKER_URL = "redis://localhost:6379"
 CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000", # узнать у фронта на каком хосте они запускают проект и добавить сюда + домен
-    "https://127.0.0.1:3000"
+    "http://localhost:3000",  # узнать у фронта на каком хосте они запускают проект и добавить сюда + домен
+    "https://127.0.0.1:3000",
 ]
-CORS_ALLOWED_METHODS = ["GET", "POST",]
+CORS_ALLOWED_METHODS = [
+    "GET",
+    "POST",
+]
 CORS_ORIGIN_WHITELIST = CORS_ALLOWED_ORIGINS
