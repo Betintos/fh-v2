@@ -9,3 +9,4 @@ python-slugify
 redis
 celery
 django-cors-headers
+gunicorn
