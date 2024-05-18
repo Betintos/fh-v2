@@ -5,8 +5,7 @@ from rest_framework.views import APIView
 from rest_framework import generics
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import RegisterSerializer, AccountSerializer
-
+from .serializers import RegisterSerializer
 
 User = get_user_model()
 
@@ -29,8 +28,3 @@ class ActivationView(APIView):
         user.is_active = True
         user.save()
         return Response("Активировано", 200)
-
-
-class AccountListView(generics.ListAPIView):
-    queryset = User.objects.all().filter(is_staff=False, is_superuser=False)
-    serializer_class = AccountSerializer

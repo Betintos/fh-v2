@@ -34,8 +34,9 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/v1/accounts/", include("accounts.urls")),
     path("docs/", schema_view.with_ui("swagger")),
+    path("api/v1/accounts/", include("accounts.urls")),
+    path('api/v1/', include('videos.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
