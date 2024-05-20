@@ -2,10 +2,11 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework import generics
+from rest_framework import viewsets
+from rest_framework import generics, status
 from drf_yasg.utils import swagger_auto_schema
 
-from .serializers import RegisterSerializer
+from .serializers import RegisterSerializer, AccountSerializer
 
 User = get_user_model()
 
@@ -28,3 +29,9 @@ class ActivationView(APIView):
         user.is_active = True
         user.save()
         return Response("Активировано", 200)
+
+
+
+class AccountViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = AccountSerializer
