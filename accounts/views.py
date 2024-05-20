@@ -35,3 +35,13 @@ class ActivationView(APIView):
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = AccountSerializer
+
+
+class AccountDetailView(APIView):
+    def get(self, request, email):
+        try:
+            user = User.objects.get(email=email)
+            serializer = AccountSerializer(instance=user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)

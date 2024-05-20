@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 from rest_framework.routers import SimpleRouter
 
-from .views import RegisterView, ActivationView, AccountViewSet
+from .views import RegisterView, ActivationView, AccountViewSet, AccountDetailView
 
 
 router = SimpleRouter()
@@ -17,5 +17,6 @@ urlpatterns = [
     ),
     path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("", include(router.urls))
+    path("", include(router.urls)),
+    path("<str:email>", AccountDetailView.as_view())
 ]
