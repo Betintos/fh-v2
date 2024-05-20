@@ -32,6 +32,14 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class AccountSerializer(serializers.ModelSerializer):
+    subs_count = serializers.SerializerMethodField()
     class Meta:
         model = User
-        fields = ["id", "email", "first_name", "last_name", "profile_picture"]
+        fields = ["id", "email", "first_name", "last_name", "profile_picture", "subs_count"]
+
+    def get_subs_count(self, obj):
+        return obj.subscribers.count()
+
+    
+
+
