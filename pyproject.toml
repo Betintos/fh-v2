@@ -1,12 +1,13 @@
 [tool.poetry]
-name = "final hackathon"
+name = "fh-v2"
 version = "0.1.0"
 description = ""
-authors = ["Betintos <qed.beknazar@gmail.com>"]
+authors = ["Bekbolot001 <bekbolotboronchiev.bt.966@gmail.com>"]
 readme = "README.md"
+packages = [{include = "fh_v2"}]
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.11"
 djangorestframework = "^3.15.1"
 psycopg2-binary = "^2.9.9"
 python-decouple = "^3.8"
@@ -18,6 +19,7 @@ python-slugify = "^8.0.4"
 redis = "^5.0.4"
 celery = "^5.4.0"
 django-cors-headers = "^4.3.1"
+gunicorn = "^22.0.0"
 
 
 [build-system]

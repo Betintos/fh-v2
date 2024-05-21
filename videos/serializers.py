@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Video, Comment, Like, Subscriber
+from .models import Video, Comment, Like, Subscriber, Favorite, Rating
 
 
 class VideoSerializer(serializers.ModelSerializer):
@@ -25,3 +25,13 @@ class SubscriberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscriber
         fields = "__all__"
+
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rating
+        fields = '__all__'
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Favorite
+        exclude=['user']
