@@ -36,7 +36,7 @@ class ActivationView(APIView):
 
 
 class AccountViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.all().filter(is_staff=False, is_superuser=False)
     serializer_class = AccountSerializer
 
 

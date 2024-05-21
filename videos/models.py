@@ -13,6 +13,9 @@ class Video(models.Model):
     uploaded_at = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='videos')
 
+    def __str__(self):
+        return self.title
+
 
 class Comment(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="comments")
