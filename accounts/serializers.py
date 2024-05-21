@@ -15,7 +15,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ["email", "password", "password_confirm"]
+        fields = ["email", "password", "password_confirm", "first_name", "last_name", ]
 
     def validate(self, attrs):
         p1 = attrs.get("password")
@@ -29,3 +29,17 @@ class RegisterSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         send_activation_code.delay(user.email, user.activation_code)
         return user
+
+
+class AccountSerializer(serializers.ModelSerializer):
+    subs_count = serializers.SerializerMethodField()
+    class Meta:
+        model = User
+        fields = ["id", "email", "first_name", "last_name", "profile_picture", "subs_count"]
+
+    def get_subs_count(self, obj):
+        return obj.subscribers.count()
+
+    
+
+

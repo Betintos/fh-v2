@@ -4,9 +4,13 @@ from .models import Video, Comment, Like, Subscriber, Favorite, Rating
 
 
 class VideoSerializer(serializers.ModelSerializer):
+    likes_count = serializers.SerializerMethodField()
     class Meta:
         model = Video
         fields = "__all__"
+
+    def get_likes_count(self, obj):
+        return obj.likes.count()
 
 
 class CommentSerializer(serializers.ModelSerializer):
