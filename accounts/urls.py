@@ -17,6 +17,6 @@ urlpatterns = [
     path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("", AccountViewSet.as_view({"get": "list"})),
-    path("<int:pk>/", AccountViewSet.as_view({"put": "update", "delete": "destroy", "patch": "partial_update"})),
+    path("<int:pk>/", AccountViewSet.as_view({"put": "update", "delete": "destroy", "patch": "partial_update", "get": "retrieve"})),
     path("<str:email>/", AccountDetailView.as_view())
 ]
