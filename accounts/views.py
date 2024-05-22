@@ -2,7 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.permissions import AllowAny
 from rest_framework import viewsets
 from rest_framework import generics, status
 from drf_yasg.utils import swagger_auto_schema
@@ -41,11 +40,6 @@ class AccountViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().filter(is_staff=False, is_superuser=False)
     serializer_class = AccountSerializer
     permission_classes = [IsOwnerOrReadonly]
-
-    def get_permissions(self):
-        if self.action == "retrieve":
-            permission_classes = [AllowAny]
-        return [permission() for permission in self.permission_classes]
 
 
 class AccountDetailView(APIView):
