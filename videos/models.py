@@ -38,3 +38,16 @@ class Subscriber(models.Model):
         User, on_delete=models.CASCADE, related_name="subscribers"
     )
     subscribed_at = models.DateTimeField(auto_now_add=True)
+
+
+class Rating(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Video, on_delete=models.CASCADE)
+    rating = models.IntegerField(default=0)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+class Favorite(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Video, on_delete=models.CASCADE)
+    created_at= models.DateTimeField(auto_now_add=True)
