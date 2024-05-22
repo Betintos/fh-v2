@@ -7,7 +7,6 @@ from .views import RegisterView, ActivationView, AccountViewSet, AccountDetailVi
 
 
 router = SimpleRouter()
-router.register(r"", AccountViewSet)
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
@@ -18,5 +17,7 @@ urlpatterns = [
     ),
     path("login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("", include(router.urls)),
+    path("", AccountViewSet.as_view({"get": "list"})),
+    path("<int:pk>/", AccountViewSet.as_view({"put": "update", "delete": "destroy", "patch": "partial_update", "get": "retrieve"})),
+    path("<str:email>/", AccountDetailView.as_view())
 ]

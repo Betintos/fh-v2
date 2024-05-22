@@ -7,6 +7,7 @@ from rest_framework import generics, status
 from drf_yasg.utils import swagger_auto_schema
 
 from .serializers import RegisterSerializer, AccountSerializer
+from .permissions import IsOwnerOrReadonly
 
 User = get_user_model()
 
@@ -36,8 +37,9 @@ class ActivationView(APIView):
 
 
 class AccountViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.all().filter(is_staff=False, is_superuser=False)
     serializer_class = AccountSerializer
+    permission_classes = [IsOwnerOrReadonly]
 
 
 class AccountDetailView(APIView):

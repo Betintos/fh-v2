@@ -12,12 +12,23 @@ class VideoSerializer(serializers.ModelSerializer):
     def get_likes_count(self, obj):
         return obj.likes.count()
 
+    def create(self, validated_data):
+        validated_data["owner"] = self.context["request"].user
+        video = super().create(validated_data)
+        video.save()
+        return video
+
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = "__all__"
 
+    def create(self, validated_data):
+        validated_data["author"] = self.context["request"].user
+        comment = super().create(validated_data)
+        comment.save()
+        return comment
 
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
