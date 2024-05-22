@@ -23,3 +23,21 @@ def send_activation_code(email, activation_code):
         html_message=msg_html,
         fail_silently=False,
     )
+
+
+@shared_task
+def send_password_reset_link(email, link):
+    context = {
+        "email": email,
+        "link": link,
+    }
+    msg_html = render_to_string("password_reset.html", context)
+    message = strip_tags(msg_html)
+    send_mail(
+        "Password reset",
+        message,
+        "admin@admin.com",
+        [email],
+        html_message=msg_html,
+        fail_silently=False,
+    )
